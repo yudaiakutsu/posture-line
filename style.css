@@ -1,0 +1,87 @@
+:root{
+  --bg:#10141a; --panel:#1c222b; --line:#2c3543; --fg:#e8edf3; --muted:#8b97a7;
+  --accent:#e23b3b; --primary:#2e7d4f; --btn:#28303b;
+}
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+html,body{margin:0; height:100%;}
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Helvetica Neue",sans-serif;
+  overscroll-behavior:none; touch-action:none;
+}
+#app{display:flex; flex-direction:column; height:100dvh;}
+
+/* 上部バー */
+#topbar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:max(8px,env(safe-area-inset-top)) 12px 8px; gap:8px;
+  background:var(--panel); border-bottom:1px solid var(--line);
+}
+#title{font-weight:700; font-size:16px; letter-spacing:.04em;}
+.topbtn{
+  appearance:none; border:1px solid var(--line); background:var(--btn); color:var(--fg);
+  padding:8px 16px; border-radius:10px; font-size:15px; font-weight:600;
+}
+.topbtn.primary{background:var(--primary); border-color:var(--primary);}
+.topbtn:disabled{opacity:.4;}
+
+/* 写真スロット切替 */
+#slots{display:flex; gap:8px; padding:8px 12px; background:var(--panel); border-bottom:1px solid var(--line);}
+.slotbtn{
+  flex:1; appearance:none; border:1px solid var(--line); background:var(--btn); color:var(--muted);
+  padding:9px 6px; border-radius:10px; font-size:14px; font-weight:700;
+}
+.slotbtn.active{color:#fff; border-color:var(--accent); background:#3a2530;}
+.slotbtn.has::after{content:" ●"; color:var(--primary); font-size:11px; vertical-align:1px;}
+
+/* ステージ(編集領域) */
+#stage{position:relative; flex:1; min-height:0; background:#0a0d11; overflow:hidden;}
+#canvas{position:absolute; inset:0; width:100%; height:100%; display:block; touch-action:none;}
+#hint{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  text-align:center; color:var(--muted); font-size:15px; line-height:1.8; pointer-events:none;
+}
+#zoombox{position:absolute; right:10px; bottom:10px; display:flex; flex-direction:column; gap:6px;}
+.zbtn{
+  width:42px; height:42px; border-radius:21px; border:1px solid var(--line);
+  background:rgba(28,34,43,.8); color:var(--fg); font-size:18px; backdrop-filter:blur(4px);
+}
+
+/* タブ */
+#tabs{display:flex; background:var(--panel); border-top:1px solid var(--line);}
+.tab{
+  flex:1; appearance:none; border:none; background:transparent; color:var(--muted);
+  padding:12px 0; font-size:14px; font-weight:600; border-top:2px solid transparent;
+}
+.tab.active{color:var(--fg); border-top-color:var(--accent); background:#222a35;}
+
+/* パネル */
+#panel{background:var(--panel); padding:12px 14px max(14px,env(safe-area-inset-bottom));}
+.pane{display:none;}
+.pane.active{display:block;}
+.row{display:flex; align-items:center; gap:8px; margin:8px 0;}
+.lbl{width:40px; color:var(--muted); font-size:14px;}
+.val{min-width:64px; text-align:center; font-variant-numeric:tabular-nums; font-size:18px; font-weight:700;}
+.tip{color:var(--muted); font-size:12.5px; line-height:1.6; margin:6px 0 0;}
+
+input[type=range]{flex:1; accent-color:var(--accent); height:32px;}
+.step,.wide,.rbtn{
+  appearance:none; border:1px solid var(--line); background:var(--btn); color:var(--fg);
+  border-radius:9px; font-size:14px; font-weight:600; padding:9px 10px;
+}
+.step{flex:1;}
+.wide{flex:1; padding:11px;}
+.chk{display:flex; align-items:center; gap:8px; font-size:15px; flex:1;}
+.chk input{width:20px; height:20px; accent-color:var(--accent);}
+
+/* A4プレビュー オーバーレイ */
+.overlay{
+  position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.92);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:14px; padding:16px max(16px,env(safe-area-inset-left)) max(16px,env(safe-area-inset-bottom));
+}
+.ov-img{max-width:100%; max-height:72%; object-fit:contain; box-shadow:0 6px 30px rgba(0,0,0,.6); background:#fff;}
+.ov-msg{color:var(--fg); font-size:14px; line-height:1.6; margin:0; text-align:center;}
+.ov-row{display:flex; gap:12px;}
+.ov-btn{border:1px solid var(--line); background:var(--btn); color:var(--fg); padding:12px 26px; border-radius:12px; font-size:16px; font-weight:600;}
+.ov-btn.primary{background:var(--primary); border-color:var(--primary);}
