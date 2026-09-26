@@ -21,7 +21,18 @@
 2. iPhoneをPCに**有線接続**して画像をコピー
 3. PCから有線プリンタで印刷
 
-## 使い方（Mac上で動作確認）
+## iPhoneで使う（GitHub Pages）
+
+同じWi-Fiに接続する必要はなく、ネットに繋がっていればどこからでもアクセスできる。
+
+1. iPhoneのSafariで https://yudaiakutsu.github.io/posture-line/ を開く
+2. 共有ボタン →「ホーム画面に追加」でアプリのように起動
+   （一度読み込めば**オフラインでも動作**するので、その後はネット不要）
+
+コードを更新したら `git push` するだけで、数分後に上記URLへ反映される
+（GitHub Pages: Settings → Pages、`main`ブランチのrootを配信）。
+
+## 開発時（Mac上で動作確認）
 
 ```sh
 cd ~/posture-line
@@ -30,14 +41,11 @@ python3 -m http.server 8124
 
 ブラウザで http://localhost:8124 を開く。
 
-## iPhoneで使う
-
-1. Mac で上記サーバーを起動（または GitHub Pages 等に公開）
-2. iPhone を**同じ Wi-Fi**につなぐ
-3. Safari で `http://<MacのIPアドレス>:8124` を開く
-   （IPアドレスは `ipconfig getifaddr en0` で確認）
-4. 共有ボタン →「ホーム画面に追加」でアプリのように起動
-   （一度読み込めば**オフラインでも動作**するので、その後はネット不要）
+同一Wi-Fi内であれば iPhone の Safari から `http://<MacのIPアドレス>:8124`
+（IPアドレスは `ipconfig getifaddr en0` で確認）でも確認できるが、
+Macが実際の家庭用Wi-Fiに接続されておらず「iPhoneの個人ホットスポット」経由になっていると
+（`en0`のIPが`192.0.0.2`等になる）、iPhone側からMacへは繋がらないので注意。
+迷ったら上記のGitHub Pages版を使うのが確実。
 
 ## 操作のコツ
 
